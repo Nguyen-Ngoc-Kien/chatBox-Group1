@@ -8,7 +8,7 @@ module.exports = {
   container: {
       center: true,
       screens: {
-        'xl': '1440px',
+        'xl': '1024px',
       }
     },
 }
