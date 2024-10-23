@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Messaging Interface with Plus Button</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100">
+    <!-- Container -->
+    <div id="header" class="h-16 flex bg-white shadow-md mb-3 fixed top-0 left-0 right-0 z-10">
+        <div class="w-full md:w-1/4">
+            <div class="p-4">
+                <button id="back" class="flex items-center gap-2">
+                    <i class="fa-solid fa-circle-arrow-left text-3xl"></i>
+                    <div class="text-3xl">Chat</div>
+                </button>
+            </div>
+        </div>
+        <div id="title" class="w-full md:w-3/4 p-4 flex flex-col justify-between items-center text-3xl">
+            Cập nhật thông tin cá nhân
+        </div>
+    </div>
+
+    <div class="flex h-screen mt-16 flex-col md:flex-row">
+
+        <!-- Sidebar -->
+        <div class="w-full md:w-1/4 bg-gray-200 p-4">
+            <div class="space-y-4 text-xl">
+                <button id="updateInfoButton"
+                    class="w-full text-left p-4 bg-white shadow hover:bg-gray-100 transition-all rounded-lg">
+                    Cập nhật thông tin cá nhân
+                </button>
+                <button id="changePasswordButton"
+                    class="w-full text-left p-4 bg-white shadow hover:bg-gray-100 transition-all rounded-lg">
+                    Đổi mật khẩu
+                </button>
+            </div>
+        </div>
+
+        <!-- update info Area -->
+        <div id="updateInfoArea" class="w-full md:w-3/4 bg-white p-4 flex flex-col pt-8 gap-8 flex-wrap">
+            <div class="w-36 h-44 self-center rounded-md relative">
+                <img class="rounded-md border-2 border-gray-200 w-36 h-36" src="" alt="">
+                <input class="absolute bottom-0 top-0 left-0 right-0 opacity-0 cursor-pointer" type="file">
+                <label for="file-input"
+                    class=" inset-0 flex items-center justify-center bg-gray-200 text-gray-700 rounded-md cursor-pointer mt-1">
+                    Upload Image
+                </label>
+            </div>
+            <div>
+                <form class="max-w-md mx-auto text-xl flex flex-col gap-6">
+                    <div class="flex flex-col md:flex-row items-center gap-4">
+                        <label class="w-full md:w-1/3" for="email">Email:</label>
+                        <input class="border-2 border-gray-500 flex-1 rounded-md" type="text" id="email" name="email">
+                    </div>
+                    <div class="flex flex-col md:flex-row items-center gap-4">
+                        <label class="w-full md:w-1/3" for="fname">Tên người dùng:</label>
+                        <input class="border-2 border-gray-500 flex-1 rounded-md" type="text" id="fname" name="fname">
+                    </div>
+                </form>
+            </div>
+            <button class="border-solid border-gray-300 border-2 mt-6 rounded-md bg-slate-100 p-1 w-28 self-center">Cập
+                nhật</button>
+
+        </div>
+
+        <div id="updatePasswordArea" class="w-full md:w-3/4 bg-white p-4 flex flex-col pt-28 gap-8 flex-wrap">
+            <div class="max-w-md mx-auto">
+                <form class="text-xl flex flex-col gap-6">
+                    <div class="flex flex-col md:flex-row items-center gap-4">
+                        <label class="w-full md:w-1/3" for="fname">Mật khẩu cũ:</label>
+                        <input class="border-2 border-gray-500 flex-1 rounded-md" type="text" id="fname" name="fname">
+                    </div>
+                    <div class="flex flex-col md:flex-row items-center gap-4">
+                        <label class="w-full md:w-1/3" for="email">Mật khẩu mới:</label>
+                        <input class="border-2 border-gray-500 flex-1 rounded-md" type="text" id="email" name="email">
+                    </div>
+                    <div class="flex flex-col md:flex-row items-center gap-4">
+                        <label class="w-full md:w-1/3" for="email">Nhập lại mật khẩu mới:</label>
+                        <input class="border-2 border-gray-500 flex-1 rounded-md" type="text" id="email" name="email">
+                    </div>
+                </form>
+
+                <button class="border-solid border-gray-300 border-2 mt-6 rounded-md bg-slate-100 p-1">Cập nhật</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="../js/updateInfo.js"></script>
+</body>
+
+</html>
