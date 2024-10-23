@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Messaging Interface with Plus Button</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100">
+
+  <!-- Container -->
+  <div class="flex h-screen">
+
+    <!-- Sidebar -->
+    <div class="w-1/4 bg-gray-200 p-4">
+      <!-- Search bar -->
+      <div class="relative">
+        <input type="text" placeholder="Search" class="w-full p-2 rounded-lg bg-white border border-gray-300">
+      </div>
+
+      <!-- Contacts list -->
+      <div class="mt-6 space-y-4">
+        <div class="flex items-center space-x-3">
+          <img src="https://i.pravatar.cc/40" alt="Avatar" class="rounded-full w-10 h-10">
+          <div>
+            <h3 class="text-sm font-semibold">Bill Kuphal</h3>
+            <p class="text-xs text-gray-500">Online for 10 mins</p>
+          </div>
+        </div>
+
+        <div class="flex items-center space-x-3">
+          <img src="https://i.pravatar.cc/41" alt="Avatar" class="rounded-full w-10 h-10">
+          <div>
+            <h3 class="text-sm font-semibold">Photographers</h3>
+            <p class="text-xs text-gray-500">Here’re my latest drone shots</p>
+          </div>
+          <span class="text-sm bg-red-500 text-white px-2 py-1 rounded-full">80</span>
+        </div>
+
+        <!-- Other chat contacts -->
+        <div class="flex items-center space-x-3">
+          <img src="https://i.pravatar.cc/42" alt="Avatar" class="rounded-full w-10 h-10">
+          <div>
+            <h3 class="text-sm font-semibold">Daryl Bogisch, Ian Daniel, +1</h3>
+            <p class="text-xs text-gray-500">Store is out of stock</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Chat Area -->
+    <div class="w-3/4 bg-white p-4 flex flex-col justify-between">
+      <!-- Chat header -->
+      <div class="flex items-center justify-between pb-4 border-b border-gray-200">
+        <div class="flex items-center space-x-3">
+          <img src="https://i.pravatar.cc/45" alt="Avatar" class="rounded-full w-10 h-10">
+          <div>
+            <h3 class="text-lg font-semibold">Bill Kuphal</h3>
+            <p class="text-xs text-gray-500">Online for 10 mins</p>
+          </div>
+        </div>
+        <div>
+          <p class="text-xs text-gray-500">9:41 AM</p>
+        </div>
+      </div>
+
+      <!-- Chat messages -->
+      <div class="flex-1 overflow-y-auto p-4 space-y-4">
+        <!-- Message 1 -->
+        <div class="flex">
+          <div class="flex-shrink-0">
+            <img src="https://i.pravatar.cc/46" alt="Avatar" class="rounded-full w-10 h-10">
+          </div>
+          <div class="ml-3 bg-gray-200 p-3 rounded-lg text-sm text-gray-700">
+            Who was that philosopher you shared with me recently?
+          </div>
+        </div>
+
+        <!-- User reply -->
+        <div class="flex justify-end">
+          <div class="bg-blue-500 text-white p-3 rounded-lg text-sm max-w-md">
+            Roland Barthes
+          </div>
+        </div>
+
+        <!-- Message 2 -->
+        <div class="flex">
+          <div class="flex-shrink-0">
+            <img src="https://i.pravatar.cc/47" alt="Avatar" class="rounded-full w-10 h-10">
+          </div>
+          <div class="ml-3 bg-gray-200 p-3 rounded-lg text-sm text-gray-700">
+            That’s him! What was his vision statement?
+          </div>
+        </div>
+
+        <!-- User reply -->
+        <div class="flex justify-end">
+          <div class="bg-blue-500 text-white p-3 rounded-lg text-sm max-w-md">
+            "Ultimately in order to see a photograph well, it is best to look away or close your eyes."
+          </div>
+        </div>
+
+        <!-- Message with image -->
+        <div class="flex justify-end">
+          <div class="bg-blue-500 text-white p-3 rounded-lg text-sm max-w-md">
+            <img src="https://source.unsplash.com/featured/?aerial" alt="Aerial Photo" class="rounded-lg mb-2">
+            Aerial photograph from the Helsinki urban environment division.
+          </div>
+        </div>
+      </div>
+
+      <!-- Chat input with plus button -->
+      <div class="border-t border-gray-200 p-4 flex items-center space-x-3">
+        <!-- Plus button for adding attachment -->
+        <button class="bg-gray-200 p-2 rounded-full hover:bg-gray-300 focus:outline-none">
+          <img src="https://cdn-icons-png.flaticon.com/512/1828/1828919.png" alt="Plus" class="w-6 h-6">
+        </button>
+        <input type="text" placeholder="Type your message..." class="w-full p-2 rounded-lg border border-gray-300">
+        <button class="bg-blue-500 p-2 rounded-full hover:bg-blue-600 focus:outline-none">
+          <img src="https://cdn-icons-png.flaticon.com/512/60/60525.png" alt="Send" class="w-6 h-6">
+        </button>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
