@@ -10,7 +10,7 @@ loginButton.addEventListener("click", async (event) => {
     };
 
     try {
-        const response = await fetch('http://localhost:80/api/v1/users/login', {
+        const response = await fetch('http://192.168.1.190/api/v1/users/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',

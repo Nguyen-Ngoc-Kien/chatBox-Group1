@@ -2,7 +2,10 @@
 module.exports = {
   content: ["./src/**/*.{html,js}"],
   theme: {
-    extend: {      
+    extend: {     
+      backgroundColor: {
+        'custom-gradient': 'linear-gradient(62deg, #8EC5FC 0%, #E0C3FC 100%)',
+      },
       maxWidth: {
       'screen-sm': '640px',
       'screen-md': '768px',

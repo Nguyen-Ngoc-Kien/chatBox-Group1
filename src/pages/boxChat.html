@@ -14,33 +14,47 @@
       color: white;
     }
 
+    .dark-mode .chat-area {
+      background: linear-gradient(to right, #363795, #005C97);
+    }
+  
+    /* Sidebar background gradient for dark mode */
+    .dark-mode #sidebar {
+      background: linear-gradient(to right, #4b79a1, #283e51);
+    }
+  
     .dark-mode .bg-white {
       background-color: #334155;
     }
-
+  
     .dark-mode .bg-gray-200 {
       background-color: #475569;
     }
-
+  
     .dark-mode .bg-gray-100 {
       background-color: #1e293b;
     }
-
+  
     .dark-mode .text-gray-700 {
       color: #e2e8f0;
     }
-
+  
     .dark-mode .text-gray-500 {
       color: #94a3b8;
     }
-
+  
     .dark-mode .hover\:bg-gray-100:hover {
       background-color: #475569;
     }
-
+  
     .dark-mode .border-gray-200 {
       border-color: #64748b;
     }
+    .dark-mode .mess{
+      background: linear-gradient(to top, #30cfd0 0%, #330867 100%);
+    }
+
+
   </style>
 </head>
 
@@ -50,12 +64,13 @@
   <div class="container mx-auto flex flex-col h-screen md:flex-row">
 
     <!-- Sidebar (Responsive) -->
-    <div id="sidebar" class="w-full md:w-1/4 bg-gray-200 p-4 hidden md:block">
+    <div id="sidebar" class="w-full md:w-1/4 bg-gray-200 p-4 hidden md:block bg-gradient-to-r from-blue-300 to-purple-300">
       <div class="relative flex gap-2">
         <img id="menu-icon" src="https://cdn-icons-png.flaticon.com/512/1828/1828859.png" alt="Menu Icon"
           class="w-6 h-6 cursor-pointer mt-2 screen-md:hidden">
-        <input type="text" id="search-input" placeholder="Search"
-          class="w-full p-2 rounded-lg bg-white border border-gray-300">
+
+        <input type="text" id="search-input" placeholder="Search" class="w-full p-2 rounded-lg bg-white border border-gray-300">
+
         <span class="absolute inset-y-0 right-3 flex items-center">
           <img src="https://cdn-icons-png.flaticon.com/512/622/622669.png" alt="Search Icon" class="w-5 h-5">
         </span>
@@ -72,8 +87,8 @@
           <i class="fa-brands fa-stack-exchange"></i>
           <a href="#" class="block px-4 py-2 text-gray-700">New Direct Message</a>
         </div>
-        <div class="group flex items-center gap-[5px] mx-[10px] hover:bg-gray-100 ">
-          <i class="fa-solid fa-user-group"></i>
+        <div class="group flex items-center gap-[5px] mx-[10px] hover:bg-gray-100" id="new-group">
+             <i class="fa-solid fa-user-group"></i>
           <a href="#" class="block px-4 py-2 text-gray-700">New Group</a>
         </div>
         <div class="group flex items-center mx-[10px] gap-[5px] my-[10px]">
@@ -93,29 +108,29 @@
       </div>
 
       <!-- Contacts list -->
-      <div class="hidden mt-6 space-y-4">
-        <div class="flex items-center space-x-3 cursor-pointer hover:bg-slate-300">
+      <div class="mt-6 space-y-4">
+        <div class="flex items-center space-x-3 cursor-pointer hover:scale-105 hover:bg-[linear-gradient(19deg,#21D4FD_0%,#B721FF_100%)] p-[5px] rounded-[5px] leading-[5px] hover:text-white">
           <img src="https://i.pravatar.cc/40" alt="Avatar" class="rounded-full w-10 h-10">
           <div>
             <h3 class="text-sm font-semibold">Bill Kuphal</h3>
-            <p class="text-xs text-gray-500">Online for 10 mins</p>
+            <p class="text-xs text-gray-500 hover:text-white">Online for 10 mins</p>
           </div>
         </div>
 
-        <div class="flex items-center space-x-3 cursor-pointer hover:bg-slate-300">
+        <div class="flex items-center space-x-3 cursor-pointer hover:scale-105 hover:bg-[linear-gradient(19deg,#21D4FD_0%,#B721FF_100%)] p-[5px] rounded-[5px] leading-[5px] hover:text-white">
           <img src="https://i.pravatar.cc/41" alt="Avatar" class="rounded-full w-10 h-10">
           <div>
             <h3 class="text-sm font-semibold">Photographers</h3>
-            <p class="text-xs text-gray-500">Here’re my latest drone shots</p>
+            <p class="text-xs text-gray-500 hover:text-white">Here’re my latest drone shots</p>
           </div>
           <span class="text-sm bg-red-500 text-white px-2 py-1 rounded-full">80</span>
         </div>
 
-        <div class="flex items-center space-x-3 cursor-pointer hover:bg-slate-300">
+        <div class="flex items-center space-x-3 cursor-pointer hover:scale-105 hover:bg-[linear-gradient(19deg,#21D4FD_0%,#B721FF_100%)] p-[5px] rounded-[5px] leading-[5px] hover:text-white">
           <img src="https://i.pravatar.cc/42" alt="Avatar" class="rounded-full w-10 h-10">
           <div>
             <h3 class="text-sm font-semibold">Daryl Bogisch, Ian Daniel, +1</h3>
-            <p class="text-xs text-gray-500">Store is out of stock</p>
+            <p class="text-xs text-gray-500 hover:text-white">Store is out of stock</p>
           </div>
         </div>
       </div>
@@ -128,8 +143,121 @@
       </div>
     </div>
 
+    <!-- Main modal add group -->
+    <div id="crud-modal" tabindex="-1" aria-hidden="true"
+      class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-10 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+      <div class="relative p-4 w-full max-w-md max-h-full mx-auto">
+        <!-- Modal content -->
+        <div class="relative bg-[#E9E2FE] rounded-lg shadow dark:bg-gray-700 z-10">
+          <!-- Modal header -->
+          <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+            <h3 class="text-lg font-semibold text-gray-900 dark:text-white">
+              Create New Group
+            </h3>
+            <button id="closed-modal" type="button"
+              class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+              data-modal-toggle="crud-modal">
+              <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 14 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+              </svg>
+              <span class="sr-only text-gray-700">Close modal</span>
+            </button>
+          </div>
+          <!-- Modal body -->
+          <form id="groupForm" class="p-4 md:p-5">
+            <div class="grid gap-4 mb-4 grid-cols-2">
+              <div class="col-span-2">
+                <label for="name" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
+                <input type="text" name="name" id="name"
+                  class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500"
+                  placeholder="Group Name" required="">
+              </div>
+              <div class="col-span-2 flex gap-[30px] mt-[10px]">
+                <input id="isPrivate" name="isPrivate" type="checkbox"
+                  class="form-checkbox h-5 w-5 text-blue-600 border-gray-300 rounded focus:ring-blue-500 focus:border-blue-500">
+                <label for="isPrivate" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Is
+                  Private</label>
+              </div>
+              <div class="col-span-2">
+                <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Group
+                  Description</label>
+                <textarea id="description" name="description" rows="4"
+                  class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                  placeholder="Write group description here"></textarea>
+              </div>
+            </div>
+            <button type="submit"
+              class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+              <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                  d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                  clip-rule="evenodd"></path>
+              </svg>
+              Add new Group
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main modal add member -->
+    <div id="add-member-modal" tabindex="-1" aria-hidden="true"
+      class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-10 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+      <div class="relative p-4 w-full max-w-md max-h-full mx-auto">
+        <!-- Modal content -->
+        <div class="relative bg-[#E9E2FE] rounded-lg shadow dark:bg-gray-700 z-10">
+          <!-- Modal header -->
+          <div class="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
+            <h3 class="text-lg font-semibold text-gray-500 dark:text-white">
+              Add New Member
+            </h3>
+            <button id="closed-modal-member" type="button"
+              class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
+              data-modal-toggle="crud-modal">
+              <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                viewBox="0 0 14 14">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6" />
+              </svg>
+              <span class="sr-only text-gray-700">Close modal</span>
+            </button>
+          </div>
+          <!-- Modal body -->
+          <form class="p-4 md:p-5">
+            <div class="mb-4">
+              <input type="text" placeholder="Search" class="w-full p-2 rounded-lg bg-white border border-gray-300">
+              <span class="absolute inset-y-0 right-3 flex items-center mr-[10px] h-[10px] mt-[100px]">
+                <img src="https://cdn-icons-png.flaticon.com/512/622/622669.png" alt="Search Icon"
+                  class="w-5 h-5 mr-[18px] mt-[16px]">
+              </span>
+            </div>
+            <div class="flex items-center space-x-3 cursor-pointer hover:bg-slate-300 mb-[10px]">
+              <img src="https://i.pravatar.cc/40" alt="Avatar" class="rounded-full w-10 h-10">
+              <div>
+                <h3 class="text-sm font-semibold">Bill Kuphal</h3>
+                <p class="text-xs text-gray-500">Online for 10 mins</p>
+              </div>
+            </div>
+            <button type="submit"
+              class="text-white inline-flex items-center bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+              <svg class="me-1 -ms-1 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd"
+                  d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z"
+                  clip-rule="evenodd"></path>
+              </svg>
+              Add new Member
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
     <!-- Chat Area -->
-    <div id="chatArea" class="w-full md:w-3/4 bg-white p-4 flex flex-col justify-between">
+
+    <div id="chatArea" class="chat-area md:w-3/4 bg-white p-4 flex flex-col justify-between bg-gradient-to-t from-[#D9AFD9] to-[#97D9E1]">
       <!-- Chat header -->
       <div class="flex items-center justify-between pb-4 border-b border-gray-200">
         <div class="flex items-center space-x-3">
@@ -138,6 +266,49 @@
             <h3 id="userChatting" class="text-lg font-semibold"></h3>
           </div>
         </div>
+
+        <div>
+          <div id="newMember"
+            class="flex gap-[15px] hover:bg-slate-200 cursor-pointer w-50 h-7 justify-center items-center">
+            <i class="fa-solid fa-user-plus"></i>
+            <p class="text-xs text-gray-700">Add Member</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Chat messages -->
+      <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-4 ">
+        <!-- Message examples can be removed -->
+        <div class="flex">
+          <div class="flex-shrink-0">
+            <img src="https://i.pravatar.cc/46" alt="Avatar" class="rounded-full w-10 h-10">
+          </div>
+          <div class="ml-3 bg-gray-200 p-3 rounded-lg text-sm text-gray-700">
+            Who was that philosopher you shared with me recently?
+          </div>
+        </div>
+
+        <div class="flex justify-end">
+          <div class=" mess text-white p-3 rounded-lg text-sm max-w-md bg-[linear-gradient(19deg,#21D4FD_0%,#B721FF_100%)]">
+            Roland Barthes
+          </div>
+        </div>
+
+        <div class="flex">
+          <div class="flex-shrink-0">
+            <img src="https://i.pravatar.cc/47" alt="Avatar" class="rounded-full w-10 h-10">
+          </div>
+          <div class="ml-3 bg-gray-200 p-3 rounded-lg text-sm text-gray-700">
+            That’s him! What was his vision statement?
+          </div>
+        </div>
+
+        <div class="flex justify-end">
+          <div class="mess bg-[linear-gradient(19deg,#21D4FD_0%,#B721FF_100%)] text-white p-3 rounded-lg text-sm max-w-md">
+            "Ultimately in order to see a photograph well, it is best to look away or close your eyes."
+          </div>
+        </div>
+
       </div>
 
       <!-- Chat messages -->
@@ -146,11 +317,13 @@
 
         <!-- Preview area for selected images -->
         <div id="image-preview-area" class="flex space-x-2 mt-4"></div>
+
       </div>
 
       <!-- Chat input with attachment -->
       <div class="border-t border-gray-200 p-4 flex items-center space-x-3">
         <!-- Plus button for adding attachment -->
+
         <form action="">
           <input type="file" id="image-input" accept="image/*" multiple class="hidden" />
           <button id="add-image-btn" class="bg-gray-200 p-2 rounded-full hover:bg-gray-300 focus:outline-none">
@@ -186,10 +359,83 @@
     const dropdownMenu = document.getElementById('dropdown-menu');
     const darkModeToggle = document.getElementById('dark-mode-toggle');
     const body = document.body;
+    const crudModal = document.getElementById('crud-modal');
+    const closedModal = document.getElementById('closed-modal');
+    const closedModalMember = document.getElementById('closed-modal-member');
+    const addModal = document.getElementById('add-member-modal');
+    const form = document.getElementById('groupForm');
+
+    form.addEventListener('submit', async function (event) {
+      event.preventDefault(); // Prevent the default form submission
+
+      // Gather the form data
+      const formData = {
+        name: document.getElementById('name').value,
+        description: document.getElementById('description').value,
+        isPrivate: document.getElementById('isPrivate').checked,
+        createdBy: localStorage.getItem("userId")
+      };
+
+      try {
+        // Send a POST request to the API
+        const response = await fetch('http://192.168.1.190/api/v1/rooms', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(formData) // Convert form data to JSON
+        });
+
+        // Handle the response
+        if (response.ok) {
+          const result = await response.json();
+          alert('Group created successfully!');
+          console.log(result); // You can process the response if needed
+        } else {
+          throw new Error('Failed to create group');
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        alert('Error creating group: ' + error.message);
+      }
+    });
 
     menuIcon.addEventListener('click', () => {
       dropdownMenu.classList.toggle('hidden'); // Toggle visibility of the dropdown
     });
+
+    // Show modal when "New Group" is clicked
+    const newGroupItem = document.getElementById('new-group');
+
+    newGroupItem.addEventListener('click', (event) => {
+      event.preventDefault(); // Prevent the default action of the anchor
+      crudModal.classList.remove('hidden'); // Show the modal
+    });
+
+    // Close modal when clicking outside of it
+    window.addEventListener('click', (event) => {
+      if (event.target === crudModal) {
+        crudModal.classList.add('hidden'); // Hide the modal
+      }
+    });
+
+    closedModal.addEventListener('click', (event) => {
+      crudModal.classList.add('hidden'); // Hide the modal
+    });
+
+
+    // Show modal when "New Group" is clicked
+    const newMember = document.getElementById('newMember');
+
+    newMember.addEventListener('click', (event) => {
+      event.preventDefault(); // Prevent the default action of the anchor
+      addModal.classList.remove('hidden'); // Show the modal
+    });
+
+    closedModalMember.addEventListener('click', (event) => {
+      addModal.classList.add('hidden'); // Hide the modal
+    });
+
 
     // Toggle dark mode
     darkModeToggle.addEventListener('change', () => {
@@ -305,9 +551,14 @@
       imageInput.value = ''; // Clear the image input
       imagePreviewArea.innerHTML = ''; // Clear image preview area
     }
+
+  </script>
+  <script src="../js/DTO.js"></script>
+
   </script> -->
   <script type="text/javascript" src="../js/boxChat.js"></script>
   <script type="text/javascript" src="../js/contact.js"></script>
+
 </body>
 
 </html>
