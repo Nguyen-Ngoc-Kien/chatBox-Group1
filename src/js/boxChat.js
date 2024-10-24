@@ -1,11 +1,13 @@
 const userId = localStorage.getItem('userId');
 const avatarImg = document.getElementById("avatar");
 const avatarSearch = document.getElementById("avatarSearch");
-let intervalId; // To store the interval ID for clearing previous intervals
+let intervalId; 
+let selectedUser = null; 
 
+// Lấy thông tin người dùng đăng nhập
 (async function getUserInfo() {
     try {
-        const response = await fetch(`http://localhost:80/api/v1/users/${userId}`, {
+        const response = await fetch(`http://192.168.1.212:80/api/v1/users/${userId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -34,8 +36,7 @@ searchInput.addEventListener('input', function () {
     const query = searchInput.value;
 
     if (query.length > 0) {
-        // Fetch results from the API
-        fetch(`http://localhost:80/api/v1/users/search?username=${query}`)
+        fetch(`http://192.168.1.212:80/api/v1/users/search?username=${query}`)
             .then(response => response.json())
             .then(data => {
                 displayResults(data.result);
@@ -51,7 +52,6 @@ searchInput.addEventListener('input', function () {
 const userChatting = document.getElementById("userChatting");
 const avatarUserChatting = document.getElementById("avatarUserChatting");
 let currentPage = 1;
-
 const chatMessages = document.getElementById("chatMessages");
 
 function displayResults(users) {
@@ -63,59 +63,25 @@ function displayResults(users) {
             const img = user.avatar ? user.avatar : "../assets/avatar.jpg";
             userElement.innerHTML =
                 `<div class="flex items-center space-x-3 cursor-pointer hover:bg-slate-300">
-                <img id="avatarSearch" src="${img}" alt="Avatar" class="rounded-full w-10 h-10">
-                <div>
-                     <h3 id="userSearch" class="text-sm font-semibold line-clamp-1">${user.username}</h3>
-                </div>
-            </div>`;
+                    <img id="avatarSearch" src="${img}" alt="Avatar" class="rounded-full w-10 h-10">
+                    <div>
+                         <h3 id="userSearch" class="text-sm font-semibold line-clamp-1">${user.username}</h3>
+                    </div>
+                </div>`;
             resultsContainer.appendChild(userElement);
 
             userElement.addEventListener("click", () => {
-                // Clear the previous interval if it exists
+                selectedUser = user; 
+
                 if (intervalId) {
                     clearInterval(intervalId);
                 }
 
-                // Clear the previous messages
                 chatMessages.innerHTML = '';
 
-                // Set a new interval for the current user
                 intervalId = setInterval(() => {
-                    renderListMessage(userId, user, currentPage);
+                    renderListMessage(userId, selectedUser, currentPage);
                 }, 1000);
-            });
-
-            document.querySelector("form").addEventListener("submit", function (e) {
-                e.preventDefault();
-                const messageInput = document.getElementById("message-input");
-                const message = messageInput.value;
-
-                fetch(`http://localhost:80/api/v1/private-messages`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({
-                        message: message,
-                        messageType: "TEXT",
-                        attachment: null,
-                        senderId: userId,
-                        receiverId: user.id
-                    })
-                })
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json();
-                })
-                .then(data => {
-                    displayResults(data.result);
-                    messageInput.value = "";
-                })
-                .catch(error => {
-                    console.error('Error fetching data:', error);
-                });
             });
         });
     } else {
@@ -126,10 +92,9 @@ function displayResults(users) {
 const renderListMessage = (userId, user, currentPage) => {
     console.log("id th kia", user.id);
 
-    fetch(`http://localhost:80/api/v1/private-messages/between/${userId}/${user.id}?pageNo=${currentPage}`)
+    fetch(`http://192.168.1.212:80/api/v1/private-messages/between/${userId}/${user.id}?pageNo=${currentPage}`)
         .then(response => response.json())
         .then(data => {
-            // Clear messages before rendering new ones
             chatMessages.innerHTML = "";
 
             avatarUserChatting.src = user.avatar ? user.avatar : "../assets/avatar.jpg";
@@ -163,7 +128,7 @@ const renderListMessage = (userId, user, currentPage) => {
                 } else {
                     chatMessages.appendChild(itemNodeLeft);
                 }
-            });
+            }); 
         })
         .catch(error => {
             console.error('Error fetching data:', error);
@@ -171,3 +136,42 @@ const renderListMessage = (userId, user, currentPage) => {
 
     userChatting.innerText = user.username;
 }
+
+document.querySelector("form").addEventListener("submit", function (e) {
+    e.preventDefault();
+
+    if (!selectedUser) {
+        alert("Please select a user to send a message to.");
+        return;
+    }
+
+    const messageInput = document.getElementById("message-input");
+    const message = messageInput.value;
+
+    fetch(`http://192.168.1.212:80/api/v1/private-messages`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+            message: message,
+            messageType: "TEXT",
+            attachment: null,
+            senderId: userId,
+            receiverId: selectedUser.id 
+        })
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log("Message sent to: ", data.result);
+        messageInput.value = ""; 
+    })
+    .catch(error => {
+        console.error('Error sending message:', error);
+    });
+});
