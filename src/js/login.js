@@ -2,7 +2,8 @@ const email = document.getElementById("email");
 const password = document.getElementById("password");
 const loginButton = document.getElementById("loginButton");
 
-loginButton.addEventListener("click", async () => {
+loginButton.addEventListener("click", async (event) => {
+    event.preventDefault();
     const loginData = {
         email: email.value,
         password: password.value

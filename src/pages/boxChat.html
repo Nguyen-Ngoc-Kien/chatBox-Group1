@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,6 +43,7 @@
     }
   </style>
 </head>
+
 <body class="bg-gray-100">
 
   <!-- Container -->
@@ -50,45 +52,48 @@
     <!-- Sidebar (Responsive) -->
     <div id="sidebar" class="w-full md:w-1/4 bg-gray-200 p-4 hidden md:block">
       <div class="relative flex gap-2">
-        <img id="menu-icon" src="https://cdn-icons-png.flaticon.com/512/1828/1828859.png" alt="Menu Icon" class="w-6 h-6 cursor-pointer mt-2 screen-md:hidden">
-        <input type="text" placeholder="Search" class="w-full p-2 rounded-lg bg-white border border-gray-300">
+        <img id="menu-icon" src="https://cdn-icons-png.flaticon.com/512/1828/1828859.png" alt="Menu Icon"
+          class="w-6 h-6 cursor-pointer mt-2 screen-md:hidden">
+        <input type="text" id="search-input" placeholder="Search"
+          class="w-full p-2 rounded-lg bg-white border border-gray-300">
         <span class="absolute inset-y-0 right-3 flex items-center">
           <img src="https://cdn-icons-png.flaticon.com/512/622/622669.png" alt="Search Icon" class="w-5 h-5">
         </span>
       </div>
-
       <!-- Dropdown Menu -->
       <div id="dropdown-menu" class="dropdown absolute mt-2 w-48 bg-white rounded-lg shadow-lg py-2 hidden z-50">
         <div class="flex items-center space-x-3 cursor-pointer hover:bg-slate-300 mx-[10px]">
-          <img src="https://i.pravatar.cc/40" alt="Avatar" class="rounded-full w-10 h-10">
+          <img id="avatar" src="" alt="Avatar" class="rounded-full w-10 h-10">
           <div>
-            <h3 class="text-sm font-semibold">Bill Kuphal</h3>
+            <h3 id="fname" class="text-sm font-semibold"></h3>
           </div>
         </div>
         <div class="group flex items-center gap-[5px] mx-[10px] hover:bg-gray-100 ">
-            <i class="fa-brands fa-stack-exchange"></i>
-            <a href="#" class="block px-4 py-2 text-gray-700">New Direct Message</a>
+          <i class="fa-brands fa-stack-exchange"></i>
+          <a href="#" class="block px-4 py-2 text-gray-700">New Direct Message</a>
         </div>
         <div class="group flex items-center gap-[5px] mx-[10px] hover:bg-gray-100 ">
-            <i class="fa-solid fa-user-group"></i>
-            <a href="#" class="block px-4 py-2 text-gray-700">New Group</a>
+          <i class="fa-solid fa-user-group"></i>
+          <a href="#" class="block px-4 py-2 text-gray-700">New Group</a>
         </div>
         <div class="group flex items-center mx-[10px] gap-[5px] my-[10px]">
-            <i class="fa-brands fa-themeco"></i>
-            <span class="mr-auto text-gray-700 mx-[10px]">Dark Mode</span>
-            <label class="inline-flex items-center cursor-pointer">
-                <input type="checkbox" id="dark-mode-toggle" class="sr-only peer">
-                <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-            </label>
+          <i class="fa-brands fa-themeco"></i>
+          <span class="mr-auto text-gray-700 mx-[10px]">Dark Mode</span>
+          <label class="inline-flex items-center cursor-pointer">
+            <input type="checkbox" id="dark-mode-toggle" class="sr-only peer">
+            <div
+              class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+            </div>
+          </label>
         </div>
         <div class="group flex items-center gap-[5px] mx-[10px] hover:bg-gray-100 ">
-            <i class="fa-solid fa-right-from-bracket"></i>
-            <a href="#" class="block px-4 py-2 text-gray-700">Sign Out</a>
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <a href="#" class="block px-4 py-2 text-gray-700">Sign Out</a>
         </div>
       </div>
 
       <!-- Contacts list -->
-      <div class="mt-6 space-y-4">
+      <div class="hidden mt-6 space-y-4">
         <div class="flex items-center space-x-3 cursor-pointer hover:bg-slate-300">
           <img src="https://i.pravatar.cc/40" alt="Avatar" class="rounded-full w-10 h-10">
           <div>
@@ -114,56 +119,30 @@
           </div>
         </div>
       </div>
+      <div id="searchUser" class="rounded-md ml-8 space-y-4 pl-2 bg-slate-300">
+
+      </div>
+
+      <div id="contact" class="mt-6 space-y-4">
+        
+      </div>
     </div>
 
     <!-- Chat Area -->
-    <div class="w-full md:w-3/4 bg-white p-4 flex flex-col justify-between">
+    <div id="chatArea" class="w-full md:w-3/4 bg-white p-4 flex flex-col justify-between">
       <!-- Chat header -->
       <div class="flex items-center justify-between pb-4 border-b border-gray-200">
         <div class="flex items-center space-x-3">
-          <img src="https://i.pravatar.cc/45" alt="Avatar" class="rounded-full w-10 h-10">
+          <img id="avatarUserChatting" src="" alt="Avatar" class="rounded-full w-10 h-10">
           <div>
-            <h3 class="text-lg font-semibold">Bill Kuphal</h3>
-            <p class="text-xs text-gray-500">Online for 10 mins</p>
+            <h3 id="userChatting" class="text-lg font-semibold"></h3>
           </div>
-        </div>
-        <div>
-          <p class="text-xs text-gray-500">9:41 AM</p>
         </div>
       </div>
 
       <!-- Chat messages -->
-      <div id="chat-messages" class="flex-1 overflow-y-auto p-4 space-y-4 ">
-        <!-- Message examples can be removed -->
-        <div class="flex">
-          <div class="flex-shrink-0">
-            <img src="https://i.pravatar.cc/46" alt="Avatar" class="rounded-full w-10 h-10">
-          </div>
-          <div class="ml-3 bg-gray-200 p-3 rounded-lg text-sm text-gray-700">
-            Who was that philosopher you shared with me recently?
-          </div>
-        </div>
+      <div id="chatMessages" class="flex-1 overflow-y-auto p-4 space-y-4 ">
 
-        <div class="flex justify-end">
-          <div class="bg-blue-500 text-white p-3 rounded-lg text-sm max-w-md">
-            Roland Barthes
-          </div>
-        </div>
-
-        <div class="flex">
-          <div class="flex-shrink-0">
-            <img src="https://i.pravatar.cc/47" alt="Avatar" class="rounded-full w-10 h-10">
-          </div>
-          <div class="ml-3 bg-gray-200 p-3 rounded-lg text-sm text-gray-700">
-            That’s him! What was his vision statement?
-          </div>
-        </div>
-
-        <div class="flex justify-end">
-          <div class="bg-blue-500 text-white p-3 rounded-lg text-sm max-w-md">
-            "Ultimately in order to see a photograph well, it is best to look away or close your eyes."
-          </div>
-        </div>
 
         <!-- Preview area for selected images -->
         <div id="image-preview-area" class="flex space-x-2 mt-4"></div>
@@ -172,19 +151,36 @@
       <!-- Chat input with attachment -->
       <div class="border-t border-gray-200 p-4 flex items-center space-x-3">
         <!-- Plus button for adding attachment -->
-        <input type="file" id="image-input" accept="image/*" multiple class="hidden" />
-        <button id="add-image-btn" class="bg-gray-200 p-2 rounded-full hover:bg-gray-300 focus:outline-none">
-          <img src="https://cdn-icons-png.flaticon.com/512/1828/1828919.png" alt="Plus" class="w-6 h-6">
-        </button>
-        <input type="text" id="message-input" placeholder="Type your message..." class="w-full p-2 rounded-lg border border-gray-300 text-black">
-        <button id="send-btn" class="bg-blue-500 w-[40px] p-2 rounded-full hover:bg-blue-600 focus:outline-none">
-          <i class="fa-regular fa-paper-plane text-[16px] text-white"></i>
-        </button>
+        <form action="">
+          <input type="file" id="image-input" accept="image/*" multiple class="hidden" />
+          <button id="add-image-btn" class="bg-gray-200 p-2 rounded-full hover:bg-gray-300 focus:outline-none">
+            <img src="https://cdn-icons-png.flaticon.com/512/1828/1828919.png" alt="Plus" class="w-6 h-6">
+          </button>
+          <input type="text" id="message-input" placeholder="Type your message..."
+            class="w-full p-2 rounded-lg border border-gray-300 text-black">
+          <button type="submit" id="send-btn"
+            class="bg-blue-500 w-[40px] p-2 rounded-full hover:bg-blue-600 focus:outline-none">
+            <i class="fa-regular fa-paper-plane text-[16px] text-white"></i>
+          </button>
+        </form>
+      </div>
+    </div>
+    <!-- Welcome -->
+    <div id="wellCome" class="hidden w-full md:w-3/4 bg-white p-4 flex flex-col items-center justify-center gap-16">
+      <div class="max-w-md mx-auto text-center flex flex-col gap-8">
+        <h3 class="text-3xl font-medium">Chào mừng đến với Box chat!</h3>
+        <div>Khám phá những tiện ích hỗ trợ làm việc và trò chuyện cùng người thân, bạn bè được tối ưu hóa cho máy tính
+          của bạn</div>
+      </div>
+      <div>
+        <img src="../assets/contact.jpg" alt="">
       </div>
     </div>
   </div>
 
-  <script>
+
+
+  <!-- <script>
     // Menu toggle script
     const menuIcon = document.getElementById('menu-icon');
     const dropdownMenu = document.getElementById('dropdown-menu');
@@ -309,7 +305,9 @@
       imageInput.value = ''; // Clear the image input
       imagePreviewArea.innerHTML = ''; // Clear image preview area
     }
-  </script>
-
+  </script> -->
+  <script type="text/javascript" src="../js/boxChat.js"></script>
+  <script type="text/javascript" src="../js/contact.js"></script>
 </body>
+
 </html>
