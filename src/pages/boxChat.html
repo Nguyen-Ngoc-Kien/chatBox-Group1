@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,6 +43,7 @@
     }
   </style>
 </head>
+
 <body class="bg-gray-100">
 
   <!-- Container -->
@@ -50,11 +52,19 @@
     <!-- Sidebar (Responsive) -->
     <div id="sidebar" class="w-full md:w-1/4 bg-gray-200 p-4 hidden md:block">
       <div class="relative flex gap-2">
-        <img id="menu-icon" src="https://cdn-icons-png.flaticon.com/512/1828/1828859.png" alt="Menu Icon" class="w-6 h-6 cursor-pointer mt-2 screen-md:hidden">
-        <input type="text" placeholder="Search" class="w-full p-2 rounded-lg bg-white border border-gray-300">
+        <img id="menu-icon" src="https://cdn-icons-png.flaticon.com/512/1828/1828859.png" alt="Menu Icon"
+          class="w-6 h-6 cursor-pointer mt-2 screen-md:hidden">
+        <input type="text" placeholder="Search" class="search-user-input w-full p-2 rounded-lg bg-white border border-gray-300">
         <span class="absolute inset-y-0 right-3 flex items-center">
           <img src="https://cdn-icons-png.flaticon.com/512/622/622669.png" alt="Search Icon" class="w-5 h-5">
         </span>
+        <div
+          class="p-[10px] list-user-search w-[225px] max-h-[200px] h-auto bg-green-400 absolute top-[44px] left-[0px] overflow-y-auto">
+          <div class="flex items-center">
+            <div class="rounded-full w-[30px] h-[30px] object-cover bg-orange-300"></div>
+            <div class="font-semibold ml-[10px] line-clamp-1 flex-1">Andrew Andrew</div>
+          </div>
+        </div>
       </div>
 
       <!-- Dropdown Menu -->
@@ -66,24 +76,26 @@
           </div>
         </div>
         <div class="group flex items-center gap-[5px] mx-[10px] hover:bg-gray-100 ">
-            <i class="fa-brands fa-stack-exchange"></i>
-            <a href="#" class="block px-4 py-2 text-gray-700">New Direct Message</a>
+          <i class="fa-brands fa-stack-exchange"></i>
+          <a href="#" class="block px-4 py-2 text-gray-700">New Direct Message</a>
         </div>
         <div class="group flex items-center gap-[5px] mx-[10px] hover:bg-gray-100 ">
-            <i class="fa-solid fa-user-group"></i>
-            <a href="#" class="block px-4 py-2 text-gray-700">New Group</a>
+          <i class="fa-solid fa-user-group"></i>
+          <a href="#" class="block px-4 py-2 text-gray-700">New Group</a>
         </div>
         <div class="group flex items-center mx-[10px] gap-[5px] my-[10px]">
-            <i class="fa-brands fa-themeco"></i>
-            <span class="mr-auto text-gray-700 mx-[10px]">Dark Mode</span>
-            <label class="inline-flex items-center cursor-pointer">
-                <input type="checkbox" id="dark-mode-toggle" class="sr-only peer">
-                <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
-            </label>
+          <i class="fa-brands fa-themeco"></i>
+          <span class="mr-auto text-gray-700 mx-[10px]">Dark Mode</span>
+          <label class="inline-flex items-center cursor-pointer">
+            <input type="checkbox" id="dark-mode-toggle" class="sr-only peer">
+            <div
+              class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600">
+            </div>
+          </label>
         </div>
         <div class="group flex items-center gap-[5px] mx-[10px] hover:bg-gray-100 ">
-            <i class="fa-solid fa-right-from-bracket"></i>
-            <a href="#" class="block px-4 py-2 text-gray-700">Sign Out</a>
+          <i class="fa-solid fa-right-from-bracket"></i>
+          <a href="#" class="block px-4 py-2 text-gray-700">Sign Out</a>
         </div>
       </div>
 
@@ -176,7 +188,8 @@
         <button id="add-image-btn" class="bg-gray-200 p-2 rounded-full hover:bg-gray-300 focus:outline-none">
           <img src="https://cdn-icons-png.flaticon.com/512/1828/1828919.png" alt="Plus" class="w-6 h-6">
         </button>
-        <input type="text" id="message-input" placeholder="Type your message..." class="w-full p-2 rounded-lg border border-gray-300 text-black">
+        <input type="text" id="message-input" placeholder="Type your message..."
+          class="w-full p-2 rounded-lg border border-gray-300 text-black">
         <button id="send-btn" class="bg-blue-500 w-[40px] p-2 rounded-full hover:bg-blue-600 focus:outline-none">
           <i class="fa-regular fa-paper-plane text-[16px] text-white"></i>
         </button>
@@ -310,6 +323,8 @@
       imagePreviewArea.innerHTML = ''; // Clear image preview area
     }
   </script>
+  <script src="../js/Search.js"></script>
 
 </body>
+
 </html>

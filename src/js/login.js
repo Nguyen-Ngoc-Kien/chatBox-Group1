@@ -2,14 +2,15 @@ const email = document.getElementById("email");
 const password = document.getElementById("password");
 const loginButton = document.getElementById("loginButton");
 
-loginButton.addEventListener("click", async () => {
+loginButton.addEventListener("click", async (event) => {
+    event.preventDefault();
     const loginData = {
         email: email.value,
         password: password.value
     };
 
     try {
-        const response = await fetch('http://192.168.1.190/api/v1/users/login', {
+        const response = await fetch('http://localhost:8080/user/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -22,11 +23,12 @@ loginButton.addEventListener("click", async () => {
         }
 
         const data = await response.json();
-        console.log('Login successful:', data);
-
-        if (data.code === "200") {
+        console.log('Login successful:', data.user);
+        localStorage.setItem("user", JSON.stringify(data.user));
+        if (data) {
+            console.log("đã đăng nhập dc")
             window.location.href = "boxChat.html"; 
-        } else if (data.code === "500") {
+        } else {
             alert("Email hoặc mật khẩu không đúng!"); 
         }
     } catch (error) {
