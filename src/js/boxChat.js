@@ -1,6 +1,7 @@
 const userId = localStorage.getItem('userId');
 const avatarImg = document.getElementById("avatar");
 const avatarSearch = document.getElementById("avatarSearch");
+let intervalId; // To store the interval ID for clearing previous intervals
 
 (async function getUserInfo() {
     try {
@@ -17,7 +18,6 @@ const avatarSearch = document.getElementById("avatarSearch");
 
         const userInfo = await response.json();
         console.log('User info:', userInfo);
-        console.log(userInfo.result.username)
         document.getElementById("fname").innerText = userInfo.result.username;
 
         avatarImg.src = userInfo.result.avatar ? userInfo.result.avatar : "../assets/avatar.jpg";
@@ -48,11 +48,12 @@ searchInput.addEventListener('input', function () {
     }
 });
 
-const userChatting = document.getElementById("userChatting")
-const avatarUserChatting = document.getElementById("avatarUserChatting")
+const userChatting = document.getElementById("userChatting");
+const avatarUserChatting = document.getElementById("avatarUserChatting");
 let currentPage = 1;
 
 const chatMessages = document.getElementById("chatMessages");
+
 function displayResults(users) {
     resultsContainer.innerHTML = '';
 
@@ -68,12 +69,21 @@ function displayResults(users) {
                 </div>
             </div>`;
             resultsContainer.appendChild(userElement);
-            userElement.addEventListener("click", 
-                ()=>{
-                    setInterval(()=>{renderListMessage(userId,user,currentPage)},1000)
+
+            userElement.addEventListener("click", () => {
+                // Clear the previous interval if it exists
+                if (intervalId) {
+                    clearInterval(intervalId);
                 }
-            )
-                // renderListMessage(userId,user,currentPage);
+
+                // Clear the previous messages
+                chatMessages.innerHTML = '';
+
+                // Set a new interval for the current user
+                intervalId = setInterval(() => {
+                    renderListMessage(userId, user, currentPage);
+                }, 1000);
+            });
 
             document.querySelector("form").addEventListener("submit", function (e) {
                 e.preventDefault();
@@ -91,41 +101,40 @@ function displayResults(users) {
                         attachment: null,
                         senderId: userId,
                         receiverId: user.id
-
                     })
                 })
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error('Network response was not ok');
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        displayResults(data.result);
-                        messageInput.value = "";
-                    })
-                    .catch(error => {
-                        console.error('Error fetching data:', error);
-                    });
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    displayResults(data.result);
+                    messageInput.value = "";
+                })
+                .catch(error => {
+                    console.error('Error fetching data:', error);
+                });
             });
-
-
         });
     } else {
         resultsContainer.innerHTML = '<p>No results found</p>';
     }
 }
 
-const renderListMessage = (userId,user,currentPage) => {
-    // let listMess=[];
+const renderListMessage = (userId, user, currentPage) => {
+    console.log("id th kia", user.id);
 
     fetch(`http://localhost:80/api/v1/private-messages/between/${userId}/${user.id}?pageNo=${currentPage}`)
         .then(response => response.json())
         .then(data => {
+            // Clear messages before rendering new ones
             chatMessages.innerHTML = "";
+
             avatarUserChatting.src = user.avatar ? user.avatar : "../assets/avatar.jpg";
             const resultData = data.result.items;
-            resultData.map((item) => {
+            resultData.forEach(item => {
                 const leftMessage = `
                     <div class="flex">
                         <div class="flex-shrink-0">
@@ -135,35 +144,30 @@ const renderListMessage = (userId,user,currentPage) => {
                             ${item.message}
                         </div>
                     </div>
-        `
+                `;
                 const rightMessage = `
                     <div class="flex justify-end">
                         <div class="bg-blue-500 text-white p-3 rounded-lg text-sm max-w-md">
                         ${item.message}
                         </div>
                     </div>
-        `
+                `;
 
                 const itemNodeLeft = document.createElement("div");
                 itemNodeLeft.innerHTML = leftMessage;
                 const itemNodeRight = document.createElement("div");
                 itemNodeRight.innerHTML = rightMessage;
+
                 if (userId == item.senderId) {
                     chatMessages.appendChild(itemNodeRight);
                 } else {
-                    {
-                        chatMessages.appendChild(itemNodeLeft)
-                    }
+                    chatMessages.appendChild(itemNodeLeft);
                 }
-
-
-            })
+            });
         })
         .catch(error => {
             console.error('Error fetching data:', error);
         });
-    userChatting.innerText = user.username
-    // chatMessages.innerHTML = "";
+
+    userChatting.innerText = user.username;
 }
-
-
