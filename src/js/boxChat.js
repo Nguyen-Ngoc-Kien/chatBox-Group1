@@ -2,7 +2,18 @@ const userId = localStorage.getItem('userId');
 const avatarImg = document.getElementById("avatar");
 const avatarSearch = document.getElementById("avatarSearch");
 let intervalId; // To store the interval ID for clearing previous intervals
+const menuIcon = document.getElementById('menu-icon');
+const dropdownMenu = document.getElementById('dropdown-menu');
+const darkModeToggle = document.getElementById('dark-mode-toggle');
+const body = document.body;
+menuIcon.addEventListener('click', () => {
+    dropdownMenu.classList.toggle('hidden'); // Toggle visibility of the dropdown
+  });
 
+  // Toggle dark mode
+  darkModeToggle.addEventListener('change', () => {
+    body.classList.toggle('dark-mode');
+  });
 (async function getUserInfo() {
     try {
         const response = await fetch(`http://localhost:80/api/v1/users/${userId}`, {
