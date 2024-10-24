@@ -9,7 +9,7 @@ loginButton.addEventListener("click", async () => {
     };
 
     try {
-        const response = await fetch('http://192.168.1.190/api/v1/users/login', {
+        const response = await fetch('http://localhost:80/api/v1/users/login', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -17,16 +17,14 @@ loginButton.addEventListener("click", async () => {
             body: JSON.stringify(loginData),
         });
 
-        if (!response.ok) {
-            throw new Error('Login failed! Please check your credentials.');
-        }
-
         const data = await response.json();
         console.log('Login successful:', data);
+        console.log('status:', data.code);
 
-        if (data.code === "200") {
+        if (response.ok) {
             window.location.href = "boxChat.html"; 
-        } else if (data.code === "500") {
+            localStorage.setItem('userId', data.result.id);
+        } else {
             alert("Email hoặc mật khẩu không đúng!"); 
         }
     } catch (error) {
